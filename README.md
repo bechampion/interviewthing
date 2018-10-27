@@ -2,6 +2,7 @@
 
 
 todo: 
+- intial S3 bucket AES serverside needs to be provisioned..
 - AMI hardcoded
 - ssh key non existent
 - docker launcher
