@@ -16,3 +16,11 @@ module "kube-vpc" {
   public_subnets = ["10.0.128.0/24","10.0.129.0/24","10.0.130.0/24"]
 
 }
+module "kube-eks" {
+  source = "./modules/aws/eks/"
+  tags = "${map("Reason","Kubernetes Cluster","Environment","interview")}"
+  cluster_name = "${var.cluster_name}"
+  interview_cluster_secid = "${module.kube-vpc.interview_cluster_secid}"
+  vpc_private_subnets = "${module.kube-vpc.vpc_private_subnets}"
+}
+
