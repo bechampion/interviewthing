@@ -8,5 +8,6 @@ todo:
 - ingress
 - template for app
 - curls.
-- automate ami GPU subscription....???
+- automate ami GPU subscription....??? -- ignore
 - default sg is rejecting 10/8 
+- terraform output json to absorve kubeconfig and configmap that need to jq'd into something
