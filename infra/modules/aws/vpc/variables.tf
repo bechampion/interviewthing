@@ -13,3 +13,6 @@ variable "public_subnets" {
 variable "private_subnets" {
   type = "list"
 }
+variable "cluster_name" { 
+  type = "string"
+}
