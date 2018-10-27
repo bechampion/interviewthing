@@ -12,3 +12,7 @@ resource "aws_iam_role_policy_attachment" "interview-cluster-AmazonEKSServicePol
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = "${aws_iam_role.interview-cluster.name}"
 }
+resource "aws_iam_instance_profile" "interview-eks-node" {
+  name = "interview-eks-node"
+  role = "${aws_iam_role.interview-cluster.name}"
+}

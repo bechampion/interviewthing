@@ -10,6 +10,14 @@ resource "aws_security_group" "interview-cluster-secgroup" {
   tags = "${var.tags}"
 }
 
+resource "aws_security_group_rule" "interview-cluster-all-in" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 0
+  protocol          = "-1"
+  security_group_id = "${aws_security_group.interview-cluster-secgroup.id}"
+  to_port           = 0
+  type              = "ingress"
+}
 resource "aws_security_group_rule" "interview-cluster-api-https-out" {
   cidr_blocks       = ["0.0.0.0/0"]
   from_port         = 443

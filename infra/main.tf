@@ -22,5 +22,6 @@ module "kube-eks" {
   cluster_name = "${var.cluster_name}"
   interview_cluster_secid = "${module.kube-vpc.interview_cluster_secid}"
   vpc_private_subnets = "${module.kube-vpc.vpc_private_subnets}"
+  vpc_public_subnets = "${module.kube-vpc.vpc_public_subnets}"
 }
 
