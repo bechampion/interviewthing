@@ -2,7 +2,10 @@ resource "aws_iam_role" "interview-cluster" {
   name = "terraform-eks-interview-cluster"
   assume_role_policy = "${file("${path.module}/templates/eks-assume.tf")}"
 }
-
+resource "aws_iam_role_policy_attachment" "interview-cluster-AmazonEC2ContainerRegistryFullAccess" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+  role       = "${aws_iam_role.interview-cluster.name}"
+}
 resource "aws_iam_role_policy_attachment" "interview-cluster-AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = "${aws_iam_role.interview-cluster.name}"
