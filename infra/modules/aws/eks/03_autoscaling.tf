@@ -16,7 +16,7 @@ resource "aws_launch_configuration" "interview-launch-conf" {
   name_prefix                 = "eks-node-interview"
   security_groups             = ["${var.interview_cluster_secid}"]
   user_data_base64            = "${base64encode(data.template_file.node-bootstrap.rendered)}"
-  key_name                    = "test"
+  #key_name                    = "test"
   lifecycle {
     create_before_destroy = true
   }
