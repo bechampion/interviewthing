@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 0.11.7"
 
   backend "s3" {
-    bucket               = "interviewthing-bucket"
+    bucket               = "interviewthing-cluster"
     key                  = "infra"
     region               = "eu-west-1"
     workspace_key_prefix = ""

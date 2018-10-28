@@ -4,3 +4,4 @@ terraform.state*
 kubectl
 iam-aws-authenticator
 terraform
+helm
