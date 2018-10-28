@@ -1,5 +1,4 @@
-all: init apply kubeconfig configmap
-docker: kubeconfig helm
+all: init apply kubeconfig configmap helm
 init:
 	terraform init
 apply:
@@ -18,10 +17,6 @@ helm:
 	helm install stable/nginx-ingress --name ingress --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-external"="0.0.0.0/0" --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-cross-zone-load-balancing-enabled"="true" --wait
 	helm install pychart/ --name pyapp --wait
 	#until [ $$(curl -s -I $$(kubectl get svc -l app=nginx-ingress -o json | jq -r '.items[] | select( .spec.type == "LoadBalancer") | .status.loadBalancer.ingress[].hostname') | grep HTTP | grep 200) -eq 1 ] ; do echo 1 ; done
-http:
-	curl	
 bye:
 	terraform destroy
 
-docker:
-	docker run -v ~/.aws/:/root/.aws/ -v ~/.kube/config:/root/.kube/config -v $$(pwd):/doall -it interview/docker-runner make -C /doall
