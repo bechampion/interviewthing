@@ -1,4 +1,17 @@
-# interviewthing
+# my test for the interview
+
+TLDR:
+I think i tried to fit as much as i could wihtout using existing tf modules etc.
+The TF code is extremely lean just used a little ammount of interpolations
+The same with the Makefiles extremely simple to read , i didn't feel the need of complexity
+The Docker image bechampion/runnner contains all the tools that you need to run this
+This sets up:
+- EKS Cluster
+- VPC 3 subnet(nat gw) 3 subnet(internet gw)
+- helm / tiller
+- helm nginx-ingress
+- helm little python app `python -m SimpleHTTPServer` but it works as a POC
+- And it all hopefullt runs from a docker image `bechampion/runner`
 
 
 todo: 
