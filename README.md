@@ -8,6 +8,9 @@ The Docker image bechampion/runnner contains all the tools that you need to run 
 This sets up:
 - EKS Cluster
 - VPC 3 subnet(nat gw) 3 subnet(internet gw)
+- Iam roles needed by EKS worker nodes
+- Secgroups needed for communication between ELB and worker nodes
+- Tagging 
 - helm / tiller
 - helm nginx-ingress
 - helm little python app `python -m SimpleHTTPServer` but it works as a POC
