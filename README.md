@@ -36,7 +36,7 @@ idea:
 - zipkin would be good if istio time is true -- time issues
 
 
-instructions:
+*instructions:*
 - have docker installed
 - this runs on root accounts no sts or anything similar
 - create s3 bucket on ireland called "interviewthing-cluster" or change on state.tf (looking to automate this)
