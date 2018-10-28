@@ -24,6 +24,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: {{ .Values.command }}
+          args:
+          {{- range .Values.args}}
+            - {{ . | quote }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 80

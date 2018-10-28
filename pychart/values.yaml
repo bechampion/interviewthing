@@ -3,10 +3,15 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-command: bash -c "python2.7 -m SimpleHTTPServer 80"
+command: 
+  - python2.7
+args: 
+  - -m
+  - SimpleHTTPServer
+  - 80
 image:
   repository: python
-  tag: stable
+  tag: latest
   pullPolicy: IfNotPresent
 
 nameOverride: ""

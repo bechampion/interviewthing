@@ -11,7 +11,7 @@ resource "aws_security_group" "interview-cluster-secgroup" {
 }
 
 resource "aws_security_group_rule" "interview-cluster-all-in" {
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["10.0.0.0/8"]
   from_port         = 0
   protocol          = "-1"
   security_group_id = "${aws_security_group.interview-cluster-secgroup.id}"

@@ -9,7 +9,7 @@ data "template_file" "node-bootstrap" {
   }
 }
 resource "aws_launch_configuration" "interview-launch-conf" {
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   iam_instance_profile        = "${aws_iam_instance_profile.interview-eks-node.name}"
   image_id                    = "ami-0c7a4976cb6fafd3a"
   instance_type               = "m4.large"
