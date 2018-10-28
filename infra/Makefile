@@ -1,4 +1,6 @@
-all: init apply kubeconfig configmap helm
+create: init apply kubeconfig configmap helm test
+destroy: init bye
+
 init:
 	terraform init
 apply:
@@ -13,10 +15,14 @@ helm:
 	kubectl apply -f kobjects/satiller.yaml
 	helm init --service-account tiller
 	until [ $$(kubectl get pod -n kube-system -l app=helm | grep Running | wc -l) -eq 1 ] ; do echo [DEBUG] Waiting for tiller.. ; done
-	helm update
-	helm install stable/nginx-ingress --name ingress --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-external"="0.0.0.0/0" --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-cross-zone-load-balancing-enabled"="true" --wait
-	helm install pychart/ --name pyapp --wait
-	#until [ $$(curl -s -I $$(kubectl get svc -l app=nginx-ingress -o json | jq -r '.items[] | select( .spec.type == "LoadBalancer") | .status.loadBalancer.ingress[].hostname') | grep HTTP | grep 200) -eq 1 ] ; do echo 1 ; done
+	helm repo update
+	helm install stable/nginx-ingress --name ingress --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-external"="0.0.0.0/0" --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-cross-zone-load-balancing-enabled"="true" --wait | true
+	helm install pychart/ --name pyapp --wait | true
+test:
+	for i in $$(seq 1 5) ; do curl $$(kubectl get svc -l app=nginx-ingress -o json | jq -r '.items[] | select( .spec.type == "LoadBalancer") | .status.loadBalancer.ingress[].hostname') -HHost:python.interview.local ; done
+	for i in $$(seq 1 5) ; do httpstat $$(kubectl get svc -l app=nginx-ingress -o json | jq -r '.items[] | select( .spec.type == "LoadBalancer") | .status.loadBalancer.ingress[].hostname') -HHost:python.interview.local -I ; done
 bye:
+	helm delete --purge pyapp | true
+	helm delete --purge ingress | true
 	terraform destroy
 

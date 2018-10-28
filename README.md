@@ -16,15 +16,17 @@ todo:
 
 
 idea:
-- Run everything from a docker file (i'll be pushing)
-- Makefile probs calls docker runs .. ?
-- pass the Makefile to container with -v ?
-- istio maybe if i got time ?
-- zipking would be good if istio time is true
+- Run everything from a container image (i need to push) that contains jq,helm,aws-iam-authenticator,kubectl,terraform
+- VPCs and EKS etc is created by terraform
+- stuff withing kube is driven by helm
+- istio maybe if i got time ? -- time issues
+- zipkin would be good if istio time is true -- time issues
 
 
 instructions:
 - have docker installed
 - this runs on root accounts no sts or anything similar
 - create s3 bucket on ireland called "interviewthing-cluster" or change on state.tf (looking to automate this)
-- hopefully `git clone https://github.com/bechampion/interviewthing.git && cd interviewthing && make all` would run creation of vpc eks helm ingress pychart and some curls to test that everything is working.
+- hopefully `git clone https://github.com/bechampion/interviewthing.git && cd interviewthing && make create` would run creation of vpc eks helm ingress pychart and some curls to test that everything is working.
+- To destroy `make destroy` bare in mind some resources don't seem to be cleaned after helm destroy so some SG have to be deleted by hand... until they have the right tags.
+- sorry for the `| true` it was a matter of time
