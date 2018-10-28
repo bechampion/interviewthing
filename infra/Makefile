@@ -1,4 +1,5 @@
 all: init apply kubeconfig configmap
+docker: kubeconfig helm
 init:
 	terraform init
 apply:
@@ -14,8 +15,8 @@ helm:
 	helm init --service-account tiller
 	until [ $$(kubectl get pod -n kube-system -l app=helm | grep Running | wc -l) -eq 1 ] ; do echo [DEBUG] Waiting for tiller.. ; done
 	helm update
-	helm install stable/nginx-ingress --name ingress
-	helm install pychart/ --pyapp
+	helm install stable/nginx-ingress --name ingress --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-external"="0.0.0.0/0" --set controller.service.annotations."service\\.beta\\.kubernetes\\.io/aws-load-balancer-cross-zone-load-balancing-enabled"="true" --wait
+	helm install pychart/ --name pyapp --wait
 	#until [ $$(curl -s -I $$(kubectl get svc -l app=nginx-ingress -o json | jq -r '.items[] | select( .spec.type == "LoadBalancer") | .status.loadBalancer.ingress[].hostname') | grep HTTP | grep 200) -eq 1 ] ; do echo 1 ; done
 http:
 	curl	
