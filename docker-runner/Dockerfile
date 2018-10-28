@@ -1,5 +1,5 @@
 FROM mesosphere/aws-cli
-RUN apk add --update ca-certificates bash make curl python py-pip jq
+RUN apk add --update ca-certificates bash make curl python py-pip jq bind-tools
 RUN pip install httpstat
 COPY kubectl /bin/kubectl
 COPY helm /bin/helm
