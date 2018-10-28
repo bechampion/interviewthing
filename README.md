@@ -20,3 +20,10 @@ idea:
 - pass the Makefile to container with -v ?
 - istio maybe if i got time ?
 - zipking would be good if istio time is true
+
+
+instructions:
+- have docker installed
+- this runs on root accounts no sts or anything similar
+- create s3 bucket on ireland called "interviewthing-cluster" or change on state.tf (looking to automate this)
+- hopefully `make all` would run creation of vpc eks helm ingress pychart and some curls to test that everything is working.
