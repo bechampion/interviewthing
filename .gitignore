@@ -3,3 +3,4 @@ terraform.state*
 *backup*
 kubectl
 iam-aws-authenticator
+terraform

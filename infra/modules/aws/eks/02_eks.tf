@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "interview-cluster" {
   role_arn        = "${aws_iam_role.interview-cluster.arn}"
   vpc_config {
     security_group_ids = ["${var.interview_cluster_secid}"]
-    subnet_ids         = ["${var.vpc_private_subnets}"]
+    subnet_ids         = ["${var.vpc_public_subnets}"]
   }
   depends_on = [
     "aws_iam_role_policy_attachment.interview-cluster-AmazonEKSClusterPolicy",

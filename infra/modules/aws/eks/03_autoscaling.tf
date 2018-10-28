@@ -28,7 +28,7 @@ resource "aws_autoscaling_group" "interview-eks" {
   max_size             = 1
   min_size             = 1
   name                 = "interview-eks-asg"
-  vpc_zone_identifier  = ["${var.vpc_public_subnets}"]
+  vpc_zone_identifier  = ["${var.vpc_private_subnets}"]
   tag {
     key                 = "kubernetes.io/cluster/${var.cluster_name}"
     value               = "owned"
